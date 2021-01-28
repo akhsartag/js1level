@@ -1,20 +1,61 @@
-var Tc = +prompt("Введи градусы по Цельсию!","36"),
-    Tf = (9/5)*Tc+32;
+// 1
+let i = 0;
+while (i <= 100) {
+	let sum = 0;
+	for (let j = 2; j <= i/2+1; j++) {
+		if (i % j == 0) {
+			sum++;
+		}
+	}
+	if (sum == 0) {
+		console.log(i)
+	}
+	i++;
+}
 
-alert(Tf);
+//2
+let basketPrice = [
+	{
+		title:'qwe',
+		price: 100
+	},
+	{
+		title:'qhwe',
+		price: 200
+	},
+	{
+		title:'qjwe',
+		price: 300
+	},
+	{
+		title:'qwke',
+		price: 400
+	}
+]
 
-var admin, name;
-name = "Василий";
-admin = name;
+for (let item of basketPrice) {
+	console.log(`товар ${item.title} стоит ${item.price}`)
+}
 
-alert(admin);
+function countBasketPrice(mas){
+	let res = 0;
+	for (let item of basketPrice) {
+		res += item.price;
+	}
+	return res;
+}
 
-var a = +prompt("enter A","32"),
-    b = +prompt("enter B","48");
+console.log(countBasketPrice(basketPrice));
 
-a += b;
-b = a - b;
-a -= b;
+//4
 
-alert (`A = ${a}, B = ${b}`);
+for (let i = 0; i <= 9; console.log(i++)){}
 
+//5
+
+for (let i = 1; i <= 20; i++) {
+	let arr = new Array(i);
+	arr.fill('x');
+	let res = arr.join('');
+	console.log(res)
+}
