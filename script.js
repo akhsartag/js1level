@@ -1,20 +1,14 @@
-var Tc = +prompt("Введи градусы по Цельсию!","36"),
-    Tf = (9/5)*Tc+32;
+let num = +prompt("enter number", "837");
+let numberObj = num => {
+	
+	if (num >= 0 && num <= 999) {
+		let obj = {"единицы": num % 10, "десятки": Math.trunc(num % 100 / 10), "сотни": Math.trunc(num / 100)};
+		return obj;
+	} else {
+		console.error("Out of range");
+		return {}
+	}
+	
+}
 
-alert(Tf);
-
-var admin, name;
-name = "Василий";
-admin = name;
-
-alert(admin);
-
-var a = +prompt("enter A","32"),
-    b = +prompt("enter B","48");
-
-a += b;
-b = a - b;
-a -= b;
-
-alert (`A = ${a}, B = ${b}`);
-
+console.log(numberObj(num));
