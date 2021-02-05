@@ -1,0 +1,91 @@
+.board-wrap {
+	display: flex;
+}
+.board {
+	display: flex;
+	flex-wrap: wrap;
+	width: 560px;
+	height: 560px;
+	border: 2px solid black;
+}
+.square {
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+}
+.black {
+	background-color: #111;
+}
+.black-figure {
+	padding: 5px;
+	background-color: black;
+	color: white;
+}
+.white {
+	background-color: #ddd;
+}
+.white-figure {
+	padding: 5px;
+	background-color: white;
+	color: black;
+}
+.rows {
+	display: flex;
+	flex-direction: column;
+}
+.row {
+	line-height: 70px;
+	height: 70px;
+}
+.columns {
+	display: flex;
+	margin-left: 10px;
+}
+.column {
+	width: 70px;
+	text-align: center;
+}
+.chess-figure{
+	background-image: url(img/figures.png);
+	background-repeat: no-repeat;
+    background-size: 360px;
+}
+.pown-white{
+	
+    background-position: -295px 0;
+}
+.pown-black{
+	background-position: -295px -60px;
+}
+.king-white {
+	background-position: 7px 5px;
+}
+
+.king-black {
+	background-position: 7px -60px;
+}
+.queen-white{
+	background-position: -55px 5px;
+}
+.queen-black{
+	background-position: -55px -60px;
+}
+.knight-white{
+	background-position: -175px 5px;
+}
+.knight-black{
+	background-position: -175px -60px;
+}
+.bishop-white{
+	background-position: -117px 5px;
+}
+.bishop-black{
+	background-position: -117px -60px;
+}
+.rook-white{
+	background-position: -235px 5px;
+}
+.rook-black{
+	background-position: -235px -60px;
+}
