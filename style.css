@@ -1,0 +1,39 @@
+.big_picture {
+	display: flex;
+}
+.prev, .next {
+	width: 40px;
+    line-height: 300px;
+    text-align: center;
+    font-size: 48px;
+	background-color: grey;
+}
+.prev:hover,.next:hover {
+	color: white;
+	cursor: pointer;
+}
+.big_picture img {
+	width: 600px;
+	height: 300px;
+}
+.small_picture {
+	width: 200px;
+	height: 100px;
+}
+#gallery {
+	display: flex;
+}
+.product {
+	display: flex;
+	flex-direction: column;
+}
+.basket {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	width: 300px;
+	background-color: lightgrey;
+}
+.basket span {
+	background-color: lightblue;
+}
