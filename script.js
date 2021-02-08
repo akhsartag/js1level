@@ -1,155 +1,107 @@
-//1
-let generateChessBoard = () => {
-	let arr = ['a','b','c','d','e','f','g','h']
-	let columns = document.createElement('div');
-	columns.className = "columns";
-	document.body.appendChild(columns);
-	let wrap = document.createElement('div');
-	wrap.className = 'board-wrap';
-	document.body.appendChild(wrap);
-	let rows = document.createElement('div');
-	rows.className = "rows";
-	wrap.appendChild(rows);
-	let board = document.createElement('div');
-	board.className = "board";
-	wrap.appendChild(board);
+
+let products = [
+		{name: "BMW", price: '2000$', src: "img/gallery/small/1.jpg"},
+		{name: "LADA", price: '100$', src: "img/gallery/small/2.jpg"},
+		{name: "TESLA", price: '3000$', src: "img/gallery/small/3.jpg"},
+	]
+let basketSum = 0;
+
+function init(){
 	
-	for (let i = 0; i < 8; i++) {
-		let row = document.createElement('div');
-		row.className = 'row';
-		row.innerHTML = i + 1;
-		rows.appendChild(row);
-		let column = document.createElement('div');
-		column.className = 'column';
-		column.innerHTML = arr[i];
-		columns.appendChild(column);
-		for (let j = 0; j < 8; j++) {
-			let square = document.createElement('div');
-			square.className = "square";
-			if (i % 2) {
-				if (j % 2) {
-					square.classList.add('white');
-					square.classList.remove('black');
-				} else {
-					square.classList.add('black');
-					square.classList.remove('white');
-				}
-			} else {
-				if (!(j % 2)) {
-					square.classList.add('white');
-					square.classList.remove('black');
-				} else {
-					square.classList.add('black');
-					square.classList.remove('white');
-				}
-			}
-				
-			board.appendChild(square);
-			}
+	let gallery = document.getElementById('gallery');
+	for (let i = 0; i < products.length; i++) {
+		let product = document.createElement('div');
+		product.className = "product";
+		gallery.appendChild(product);
+		let span = document.createElement('span');
+		span.innerHTML = `${products[i].name}`;
+		product.appendChild(span);
+		let img = document.createElement('img');
+		img.className = "small_picture";
+		img.src = `${products[i].src}`;
+		img.id = `image_${i+1}`;
+		product.appendChild(img);
+		let spanPrice = document.createElement('span');
+		spanPrice.innerHTML = `${products[i].price}`;
+		product.appendChild(spanPrice);
+		let button = document.createElement('button');
+		button.id = i;
+		button.innerHTML = "Купить";
+		button.onclick = bought;
+		product.appendChild(button);
 	}
-}	
-
-generateChessBoard();
-
+	var images = document.getElementsByTagName("img");
+	for (var i = 0; i < images.length; i++) {
+		images[i].onclick = changeBigPicture;
+		
+	}
+	let prevButton = document.querySelector('.prev');
+	prevButton.onclick = prev;
+	let nextButton = document.querySelector('.next');
+	nextButton.onclick = next;
+}
+function changeBigPicture(eventObj){
+	var appDiv = document.getElementById("big_picture");
+	appDiv.innerHTML = "";	
+	var eventElement = eventObj.target;
+	var imageNameParts = eventElement.id.split("_");
+	var src = "img/gallery/big/" + imageNameParts[1] + ".jpg";
+	appDiv.dataset.curent = imageNameParts[1];
+	var imageDomElement = document.createElement("img");
+	imageDomElement.src = src;
+	imageDomElement.onerror = imgNotFound;
+	appDiv.appendChild(imageDomElement);
+}
+//1
+let imgNotFound = () => {
+	var appDiv = document.getElementById("big_picture");
+	appDiv.innerHTML = "";
+	let text = document.createElement("span");
+	text.innerHTML = 'Картинка не найдена';
+	appDiv.appendChild(text);
+}
 //2
-let fillBoard = () => {
-	let squares = document.getElementsByClassName('square');
-	for (let i = 8; i < 16; i++) {
-		let figure = document.createElement('span');
-		figure.className = 'white-figure';
-		figure.innerHTML = 'П';
-		squares[i].appendChild(figure);
-	}
-	let figureT = document.createElement('span');
-		figureT.className = 'white-figure';
-		figureT.innerHTML = 'T';
-		squares[0].appendChild(figureT);
-		squares[7].appendChild(figureT.cloneNode(true));
-	let figureK = document.createElement('span');
-		figureK.className = 'white-figure';
-		figureK.innerHTML = 'K';
-		squares[1].appendChild(figureK);
-		squares[6].appendChild(figureK.cloneNode(true));
-	let figureS = document.createElement('span');
-		figureS.className = 'white-figure';
-		figureS.innerHTML = 'С';
-		squares[2].appendChild(figureS);
-		squares[5].appendChild(figureS.cloneNode(true));
-	let figureQ = document.createElement('span');
-		figureQ.className = 'white-figure';
-		figureQ.innerHTML = 'Q';
-		squares[3].appendChild(figureQ);
-	let figureF = document.createElement('span');
-		figureF.className = 'white-figure';
-		figureF.innerHTML = 'Ф';
-		squares[4].appendChild(figureF);
-
-	let figureTB = document.createElement('span');
-		figureTB.className = 'black-figure';
-		figureTB.innerHTML = 'T';
-		squares[56].appendChild(figureTB);
-		squares[63].appendChild(figureTB.cloneNode(true));
-	let figureKB = document.createElement('span');
-		figureKB.className = 'black-figure';
-		figureKB.innerHTML = 'K';
-		squares[57].appendChild(figureKB);
-		squares[62].appendChild(figureKB.cloneNode(true));
-	let figureSB = document.createElement('span');
-		figureSB.className = 'black-figure';
-		figureSB.innerHTML = 'С';
-		squares[58].appendChild(figureSB);
-		squares[61].appendChild(figureSB.cloneNode(true));
-	let figureQB = document.createElement('span');
-		figureQB.className = 'black-figure';
-		figureQB.innerHTML = 'Q';
-		squares[59].appendChild(figureQB);
-	let figureFB = document.createElement('span');
-		figureFB.className = 'black-figure';
-		figureFB.innerHTML = 'Ф';
-		squares[60].appendChild(figureFB);
-	for (let i = 48; i < 56; i++) {
-		let figure = document.createElement('span');
-		figure.className = 'black-figure';
-		figure.innerHTML = 'П';
-		squares[i].appendChild(figure);
-	}
+let bought = (e) => {
+	let ul = document.getElementById('list');
+	let price = document.getElementById('price');
+	console.log(products[e.target.id].price);
+	let li = document.createElement('li');
+	li.innerHTML=`${products[e.target.id].name}`;
+	ul.appendChild(li);
+	basketSum += parseInt(products[e.target.id].price);
+	price.innerHTML = basketSum + '$';
 }
-document.querySelector('.fill').addEventListener('click',fillBoard);
+//3
+let prev = (e) => {
+	let appDiv = document.getElementById("big_picture");
+	let currentValue = 1;
+	if (appDiv.dataset.curent == 1) {
+		appDiv.dataset.curent = 3;
+		currentValue = 3;
+	} else {
+		currentValue = --appDiv.dataset.curent;
+	}
 
-
-let fillBoardImges = () => {
-	let squares = document.getElementsByClassName('square');
-	for (let i = 0; i < 16; i++) {
-		squares[i].children[0].remove();
-		squares[i].classList.add('chess-figure');
-	}
-	for (let i = 48; i < 64; i++) {
-		squares[i].children[0].remove();
-		squares[i].classList.add('chess-figure');
-	}
-	for (let i = 48; i < 56; i++) {
-		squares[i].classList.add('pown-black');
-	}
-	for (let i = 8; i < 16; i++) {
-		squares[i].classList.add('pown-white');
-	}
-	squares[0].classList.add('rook-white');
-	squares[7].classList.add('rook-white');
-	squares[56].classList.add('rook-black');
-	squares[63].classList.add('rook-black');
-	squares[1].classList.add('knight-white');
-	squares[6].classList.add('knight-white');
-	squares[57].classList.add('knight-black');
-	squares[62].classList.add('knight-black');
-	squares[2].classList.add('bishop-white');
-	squares[5].classList.add('bishop-white');
-	squares[58].classList.add('bishop-black');
-	squares[61].classList.add('bishop-black');
-	squares[3].classList.add('king-white');
-	squares[59].classList.add('king-black');
-	squares[4].classList.add('queen-white');
-	squares[60].classList.add('queen-black');
+	appDiv.innerHTML = "";
+	let src = "img/gallery/big/" + currentValue + ".jpg";
+	let imageDomElement = document.createElement("img");
+	imageDomElement.src = src;
+	appDiv.appendChild(imageDomElement);
 }
+let next = (e) => {
+	let appDiv = document.getElementById("big_picture");
+	let currentValue = 1;
+	if (appDiv.dataset.curent == 3) {
+		appDiv.dataset.curent = 1;
+		currentValue = 1;
+	} else {
+		currentValue = ++appDiv.dataset.curent;
+	}
 
-document.querySelector('.fill-figure').addEventListener('click',fillBoardImges);
-
+	appDiv.innerHTML = "";
+	let src = "img/gallery/big/" + currentValue + ".jpg";
+	let imageDomElement = document.createElement("img");
+	imageDomElement.src = src;
+	appDiv.appendChild(imageDomElement);
+}
+window.onload = init;
